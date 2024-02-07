@@ -68,7 +68,7 @@ const CategoryModal = ({ updateCategory, addNewCategory,selectedButton, category
         let subCategoryObj = {
             "name" : subcategory,
             "reports" : reports,
-            exact: true, to: '/report/', iconClassName: 'bi bi-file-earmark', component: 'Report',
+            exact: true, to: '/report/', iconClassName: 'bi bi-file-earmark', component: 'Admin',
             "isOpen" : false
         }
 
@@ -79,13 +79,15 @@ const CategoryModal = ({ updateCategory, addNewCategory,selectedButton, category
             "reports" : []
         }
 
-        let subCategoryObjCopy = categoryObj.subCategories
-        let reportsCopy = categoryObj.reports
+        let subCategoryObjCopy = categoryObj?.subCategories ? categoryObj.subCategories : [];
+        let reportsCopy = categoryObj?.reports ? categoryObj.reports : [];
 
         // console.log("con",  categoryObj,categoryObj?.subCategories,subCategoryObjCopy.push("hi"))
 
-        selectedButton === "subCategory" && subCategoryObj?.name != "" && subCategoryObjCopy.push(subCategoryObj)
-        selectedButton === "report" && reportsCopy.push(...reports)
+        if(selectedButton === "subCategory" && subCategoryObj?.name !== ""){
+            subCategoryObjCopy?.push(subCategoryObj)
+        }
+        selectedButton === "report" && reportsCopy?.push(...reports)
         selectedButton == "category" && category != undefined && addNewCategory(categoryObject)
         
         
@@ -94,7 +96,7 @@ const CategoryModal = ({ updateCategory, addNewCategory,selectedButton, category
 
     }
 
-
+    console.log("hghghgh", categoryObj)
 
     return (
         <Modal open={isOpen} >
