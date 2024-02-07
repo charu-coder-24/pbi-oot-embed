@@ -56,8 +56,8 @@ const MenuItem = (props) => {
               {menu?.reports?.length > 0 && (
                 <ul style={{ marginLeft: "20px", background:"white" }} >
                   {menu?.reports?.map((report, index) => (
-                    <li key={index} onClick={() => setSubcategoryReportSel(index)} >
-                      <NavLink to={`/report/${report.name}`} style={{ background:"white",borderBottom: "1px solid grey", backgroundColor: index == subcategoryReportSel ? "aquamarine" : "", fontWeight: index == subcategoryReportSel ? "bold" : "inherit",cursor:"pointer",borderRadius:"2px"}} >{report.name}</NavLink>
+                    <li key={report.id} onClick={() => setSubcategoryReportSel(report.id)} >
+                      <NavLink to={`/report/${report.name}`} style={{ background:"white",borderBottom: "1px solid grey", backgroundColor: report.id == subcategoryReportSel ? "aquamarine" : "", fontWeight: report.id == subcategoryReportSel ? "bold" : "inherit",cursor:"pointer",borderRadius:"2px"}} >{report.name}</NavLink>
                     </li>
                   ))}
                 </ul>
@@ -70,7 +70,7 @@ const MenuItem = (props) => {
       <ul className={`sub-menu`}>
         {menuItem?.reports?.map((report, index) => (
           <li key={index} onClick={handleMenuSel(report)}>
-            <NavLink to={""}>{report.name}</NavLink>
+            <NavLink to={`/report/${report.name}`}>{report.name}</NavLink>
 
           </li>
         ))}

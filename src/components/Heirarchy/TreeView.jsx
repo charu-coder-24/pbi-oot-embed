@@ -96,12 +96,14 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
       let test = { ...dummyObject }
       test.categories[categoryIndex] = categoryObj;
       setDummyObj(test)
+      setCategories(test?.categories)
+      setSubCategoryDropdownState(test?.categories?.subCategories)
+      console.log("categoryObj lucj", dummyObject, categoryObj)
 
 
     }
 
     // Now, the "Supply Chain" category is updated in the main object
-    console.log("categoryObj lucj", dummyObject, categoryObj)
   }
 
   const addNewCategory = (categoryObj) => {
@@ -191,6 +193,7 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
               </button>
               <button className="add-subcategory-button" onClick={() => {
                 setIsModalOpen(true)
+                setSelectedCategory(category)
                 setSelectedButton("report")
               }}>
                 <AddCircleOutlineRoundedIcon />
@@ -361,7 +364,14 @@ const ListPage = () => {
     test.slice(0, 2)
     let a1 = [...test.slice(0, 2), ...categories];
     console.log("check", test.slice(0, 2), categories, a1)
+    let testObj = {
+      "name": "Hierarchy",
+      "categories": [...categories]
+    }
+  
     dispatch(updateMenuList(a1))
+    setDummyObj(testObj)
+    setCategories(testObj.categories)
   }
 
   // console.log("menuList", menuList,menuList.slice(2),testObj1,testObj)
