@@ -13,6 +13,8 @@ import CategoryModal from './CategoryCreation';
 import LongMenu from './VertIcon';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { updateMenuList } from '../../features/menuList/menuListSlice';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const DraggableCategory = ({ testObj, category, index, categories, setCategories, handleDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -27,6 +29,7 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
   const [selectedWorkspaces, setSelectedWorkspaces] = useState(workspaces)
   const [categoryDropdownState, setCategoryDropdownState] = useState(false)
   const [subCategoryDropdownState, setSubCategoryDropdownState] = useState(category?.subCategories)
+  const [errorMessage, setErrorMessage] = useState("")
   const menuList = useSelector((state) => state.menuListReducer.menuItems)
   const dispatch = useDispatch()
 
@@ -89,7 +92,13 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
 
     // Find the index of the "Supply Chain" category in the main object
     const categoryIndex = dummyObject.categories.findIndex(category => category.name === categoryObj.name);
+    console.log("categoryObj out", dummyObject, categoryObj)
 
+    if (categoryObj?.error) {
+      console.log("categoryObj lucj", dummyObject, categoryObj)
+
+      setErrorMessage(categoryObj.error)
+    }
     // Check if the category exists
     if (categoryIndex !== -1) {
       // Update the "Supply Chain" category with the new object
@@ -98,6 +107,7 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
       setDummyObj(test)
       setCategories(test?.categories)
       setSubCategoryDropdownState(test?.categories?.subCategories)
+      setErrorMessage("")
       console.log("categoryObj lucj", dummyObject, categoryObj)
 
 
@@ -106,12 +116,36 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
     // Now, the "Supply Chain" category is updated in the main object
   }
 
+  // const addNewCategory = (categoryObj) => {
+  //   let test = { ...dummyObject }
+  //   test.categories.push({ ...categoryObj, exact: true, to: '/home/', iconClassName: 'bi bi-file-earmark', component: '' })
+  //   console.log("check kar", test, subCategoryDropdownState)
+  //   // setSubCategoryDropdownState(categoryObj.subCategories)
+  //   // setDummyObj(test)
+  // }
+
   const addNewCategory = (categoryObj) => {
-    let test = { ...dummyObject }
-    test.categories.push({ ...categoryObj, exact: true, to: '/home/', iconClassName: 'bi bi-file-earmark', component: '' })
-    console.log("check kar", test, subCategoryDropdownState)
-    // setSubCategoryDropdownState(categoryObj.subCategories)
-    // setDummyObj(test)
+    let test = { ...dummyObject };
+    const existingCategory = test.categories.find(category => category.name === categoryObj.name);
+    console.log("check kar pehle", existingCategory);
+
+    if (!existingCategory) {
+      test.categories.push({
+        ...categoryObj,
+        exact: true,
+        to: '/home/',
+        iconClassName: 'bi bi-file-earmark',
+        component: ''
+      });
+      console.log("check kar", test, subCategoryDropdownState);
+      setErrorMessage("")
+      // setSubCategoryDropdownState(categoryObj.subCategories)
+      // setDummyObj(test)
+    } else {
+      setErrorMessage(`Category with name '${categoryObj.name}' already exists.`)
+
+      console.log(`Category with name '${categoryObj.name}' already exists.`);
+    }
   }
 
 
@@ -130,7 +164,7 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
             {!categoryDropdownState ? <ArrowDropDownOutlinedIcon /> : <ArrowDropUpIcon />}
             {/* Your existing LongMenu component or icon */}
           </span>
-          <LongMenu handleDelete={() => handleDelete()} />
+          <LongMenu handleDelete={() => handleDelete(category)} />
 
         </div>
       </div>
@@ -180,6 +214,13 @@ const DraggableCategory = ({ testObj, category, index, categories, setCategories
 
               </div>
             ))}
+            {errorMessage ? (<div style={{ display: "flex", justifyContent: "space-between" }}>
+              <p style={{ color: "red", paddingTop: "8px" }}>{errorMessage}</p>
+              <IconButton onClick={() => setErrorMessage('')}>
+                <HighlightOffIcon />
+              </IconButton>
+            </div>
+            ) : (<></>)}
 
             <div className="button-container">
               <button className="add-report-button" onClick={() => {
@@ -218,6 +259,7 @@ const ListPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState({})
   const [selectedButton, setSelectedButton] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
 
   // const testObj = {
@@ -348,15 +390,38 @@ const ListPage = () => {
     // console.log("categoryObj lucj", dummyObject,categoryObj)
   }
 
+  // const addNewCategory = (categoryObj) => {
+  //   let test = { ...dummyObject }
+  //   test.categories.push(categoryObj)
+  //   console.log("check kar", test, categoryObj)
+
+  //   setDummyObj(test)
+  //   setCategories(test.categories)
+  // }
+
   const addNewCategory = (categoryObj) => {
-    let test = { ...dummyObject }
-    test.categories.push(categoryObj)
-    console.log("check kar", test, categoryObj)
+    let test = { ...dummyObject };
+    const existingCategory = test.categories.find(category => category.name === categoryObj.name);
+    console.log("check kar pehle", existingCategory);
 
-    setDummyObj(test)
-    setCategories(test.categories)
+    if (!existingCategory) {
+      test.categories.push({
+        ...categoryObj,
+        exact: true,
+        to: '/home/',
+        iconClassName: 'bi bi-file-earmark',
+        component: ''
+      });
+      // console.log("check kar", test, categories);
+      setDummyObj(test)
+      setCategories(test.categories)
+      // setSubCategoryDropdownState(categoryObj.subCategories)
+      // setDummyObj(test)
+    } else {
+      setErrorMessage(`Category with name '${categoryObj.name}' already exists.`)
+      console.log(`Category with name '${categoryObj.name}' already exists.`);
+    }
   }
-
 
 
   const saveChanges = () => {
@@ -368,7 +433,7 @@ const ListPage = () => {
       "name": "Hierarchy",
       "categories": [...categories]
     }
-  
+
     dispatch(updateMenuList(a1))
     setDummyObj(testObj)
     setCategories(testObj.categories)
@@ -422,8 +487,8 @@ const ListPage = () => {
       <h3> Categories : </h3>
       <div className="list-container">
         {categories.length == 0 && (
-          <div style={{border: "1px solid grey", padding:"15px"}}>
-          <h4>No category has been created. Please create one by using the 'Add Category' button.</h4>
+          <div style={{ border: "1px solid grey", padding: "15px" }}>
+            <h4>No category has been created. Please create one by using the 'Add Category' button.</h4>
 
           </div>
         )}
@@ -438,17 +503,25 @@ const ListPage = () => {
             updateCategory={updateCategory}
             addNewCategory={addNewCategory}
             testObj={testObj}
-            handleDelete={() => {
-              console.log("from outer", categories, categories.splice(index, 1))
-              setCategories(categories.splice(index, 1))
+            handleDelete={(categoryObj) => {
+              console.log("from outer", categories.filter(category => category.name !== categoryObj.name))
+              setCategories(categories.filter(category => category.name !== categoryObj.name))
             }}
           />
         ))}
+        {errorMessage ? (<div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p style={{ color: "red", paddingTop: "8px" }}>{errorMessage}</p>
+          <IconButton onClick={() => setErrorMessage('')}>
+            <HighlightOffIcon />
+          </IconButton>
+        </div>
+        ) : (<></>)}
 
       </div>
       {isModalOpen && (<CategoryModal updateCategory={(categoryObj) => updateCategory(categoryObj)}
         addNewCategory={(categoryObj) => addNewCategory(categoryObj)}
         selectedButton={selectedButton} categoryObj={selectedCategory} onClose={() => setIsModalOpen(false)} />)}
+
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <button className="add-category-button" onClick={() => {
           setIsModalOpen(true)
