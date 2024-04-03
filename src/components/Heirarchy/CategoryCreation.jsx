@@ -68,7 +68,7 @@ const CategoryModal = ({ updateCategory, addNewCategory, selectedButton, categor
         let subCategoryObj = {
             "name": subcategory,
             "reports": reports,
-            exact: true, to: '/report/', iconClassName: 'bi bi-file-earmark', component: 'Admin',
+            exact: true, to: '/report/', iconClassName: 'bi bi-file-earmark', component: 'Report',
             "isOpen": false
         }
 
@@ -78,7 +78,7 @@ const CategoryModal = ({ updateCategory, addNewCategory, selectedButton, categor
             exact: true, to: '/report/*', iconClassName: 'bi bi-file-earmark', component: 'Report',
             "reports": subcategory == "" ? reports : []
         }
-
+        
         let subCategoryObjCopy = categoryObj?.subCategories ? categoryObj.subCategories : [];
         let reportsCopy = categoryObj?.reports ? categoryObj.reports : [];
         // selectedButton === "report" && reportsCopy?.push(...reports)
@@ -92,8 +92,9 @@ const CategoryModal = ({ updateCategory, addNewCategory, selectedButton, categor
                 error = "Report added already exist try adding new report!"
                 console.log("con1", newReports, error)
 
+            } else {
+                reportsCopy.push(...newReports);
             }
-            reportsCopy.push(...newReports);
         }
 
 
@@ -105,9 +106,9 @@ const CategoryModal = ({ updateCategory, addNewCategory, selectedButton, categor
         if (selectedButton === "subCategory" && subCategoryObj?.name !== "") {
             // Check if subcategory with the same name already exists
             const existingSubCategory = subCategoryObjCopy.find(subCategory => subCategory.name === subCategoryObj.name);
-
+            
             if (!existingSubCategory) {
-                subCategoryObjCopy.push(subCategoryObj);
+                subCategoryObjCopy?.push(subCategoryObj);
             } else {
                 error = `Subcategory with name '${subCategoryObj.name}' already exists.`
                 console.log(`Subcategory with name '${subCategoryObj.name}' already exists.`);

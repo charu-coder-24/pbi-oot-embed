@@ -381,13 +381,7 @@ const ListPage = () => {
       let test = { ...dummyObject }
       test.categories[categoryIndex] = categoryObj;
       setDummyObj(test)
-
-
-
     }
-
-    // Now, the "Supply Chain" category is updated in the main object
-    // console.log("categoryObj lucj", dummyObject,categoryObj)
   }
 
   // const addNewCategory = (categoryObj) => {
@@ -405,13 +399,14 @@ const ListPage = () => {
     console.log("check kar pehle", existingCategory);
 
     if (!existingCategory) {
-      test.categories.push({
-        ...categoryObj,
-        exact: true,
-        to: '/home/',
-        iconClassName: 'bi bi-file-earmark',
-        component: ''
-      });
+      test.categories.push(categoryObj)
+      // test.categories.push({
+      //   ...categoryObj,
+      //   exact: true,
+      //   to: '/home/',
+      //   iconClassName: 'bi bi-file-earmark',
+      //   component: ''
+      // });
       // console.log("check kar", test, categories);
       setDummyObj(test)
       setCategories(test.categories)
@@ -433,10 +428,23 @@ const ListPage = () => {
       "name": "Hierarchy",
       "categories": [...categories]
     }
-
-    dispatch(updateMenuList(a1))
     setDummyObj(testObj)
     setCategories(testObj.categories)
+    dispatch(updateMenuList(a1))
+   
+
+  }
+
+  const handleDelete = (categoryObj) => {
+    console.log("from outer", categories.filter(category => category.name !== categoryObj.name))
+    let filteredCat = categories.filter(category => category.name !== categoryObj.name)
+    let testObj = {
+      "name": "Hierarchy",
+      "categories": filteredCat
+    }
+    setCategories(categories.filter(category => category.name !== categoryObj.name))
+    setDummyObj(testObj)
+
   }
 
   // console.log("menuList", menuList,menuList.slice(2),testObj1,testObj)
@@ -503,10 +511,7 @@ const ListPage = () => {
             updateCategory={updateCategory}
             addNewCategory={addNewCategory}
             testObj={testObj}
-            handleDelete={(categoryObj) => {
-              console.log("from outer", categories.filter(category => category.name !== categoryObj.name))
-              setCategories(categories.filter(category => category.name !== categoryObj.name))
-            }}
+            handleDelete={(categoryObj) => handleDelete(categoryObj)}
           />
         ))}
         {errorMessage ? (<div style={{ display: "flex", justifyContent: "space-between" }}>

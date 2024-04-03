@@ -1,8 +1,12 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcons from '@mui/icons-material/Home';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import CategoryIcon from '@mui/icons-material/Category';
+import HomeIcon from "../assets/home.png"
+import AdminIcon from "../assets/setting.png"
+import BulletIcon from "../assets/more.png"
+
 
 /**
  * @author
@@ -30,9 +34,15 @@ const MenuItem = (props) => {
       >
         <div className="menu-icon">
           {/* <i class={iconClassName}></i> */}
-          {name == "Home" && (<HomeIcon />)}
-          {name == "Admin" && (<AdminPanelSettingsIcon />)}
-          {name != "Home" && name !="Admin" && ( <CategoryIcon /> )}
+          
+          {/* {name == "Home" && (<HomeIcon />)} */}
+          {name == "Home" && (<img src={HomeIcon} style={{width:"25px",height:"25px", marginTop:"5px"}}/>)}
+
+          {/* {name == "Admin" && (<AdminPanelSettingsIcon />)} */}
+          {name == "Admin" && (<img src={AdminIcon} style={{width:"25px",height:"25px", marginTop:"5px"}}/>)}
+
+          {/* {name != "Home" && name !="Admin" && ( <CategoryIcon /> )} */}
+          {name != "Home" && name !="Admin" && (<img src={BulletIcon} style={{width:"20px",height:"20px", marginTop:"10px"}}/>)}
           
         </div>
         <span>{name}</span>
