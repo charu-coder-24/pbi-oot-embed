@@ -5,31 +5,49 @@ import MenuItem from "./MenuItem";
 import { reportsDataDummy } from "../datasets/reports";
 import { getAllReports, login, menuItemsTest, tokentest } from "../utils";
 import { useMsal } from "@azure/msal-react";
-import {useDispatch, useSelector} from "react-redux"
-import { addAllReportsData, updateReports } from "../features/reports/reportSlice"
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addAllReportsData,
+  updateReports,
+} from "../features/reports/reportSlice";
 import { updateMenuList } from "../features/menuList/menuListSlice";
 
 const SideMenu = memo((props) => {
   const [inactive, setInactive] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [allReportsData, setAllReportsData] = useState(props.allReportsData);
-  const [selMenu, setSelMenu] = useState()
-  let selectedWorkspces = sessionStorage.getItem("selectedWorkspaces")?.split(",");
-  const menuItemstest = useSelector((state) => state.menuListReducer.menuItems)
-  const dispatch = useDispatch()
-  console.log("menus from side menu", menuItemstest)
-  const [menuItems, setMenuItems] = useState(menuItemsTest(menuItemstest, allReportsData))
+  const [selMenu, setSelMenu] = useState();
+  let selectedWorkspces = sessionStorage
+    .getItem("selectedWorkspaces")
+    ?.split(",");
+  const menuItemstest = useSelector((state) => state.menuListReducer.menuItems);
+  const dispatch = useDispatch();
+  console.log("menus from side menu", menuItemstest);
+  const [menuItems, setMenuItems] = useState(
+    menuItemsTest(menuItemstest, allReportsData)
+  );
   // let menuItems = menuItemsTest(allReportsData);
-  const menuList = useSelector((state) => state.menuListReducer.menuItems)
+  const menuList = useSelector((state) => state.menuListReducer.menuItems);
   const handleToggle = () => {
     setIsChecked(!isChecked); // Toggle the value
   };
 
-  
-
   const handleMenuSel = (menuItem) => {
-    setSelMenu(menuItem)
-  }
+    menuItem?.reports?.length > 0
+      ? document.querySelectorAll(".sub-reports").forEach((el, index) => {
+          try {
+            if (el.classList.contains(menuItem?.name)) {
+              el.classList.add("active");
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        })
+      : document.querySelectorAll(".sub-reports").forEach((el) => {
+          el.classList.remove("active");
+        });
+    setSelMenu(menuItem);
+  };
 
   useEffect(() => {
     if (inactive) {
@@ -44,7 +62,10 @@ const SideMenu = memo((props) => {
 
   //just an improvment and it is not recorded in video :(
   const removeActiveClassFromSubMenu = () => {
-    document.querySelectorAll(".sub-menu").forEach((el) => {
+    document.querySelectorAll(".sub-category").forEach((el) => {
+      el.classList.remove("active");
+    });
+    document.querySelectorAll(".sub-reports").forEach((el) => {
       el.classList.remove("active");
     });
   };
@@ -54,23 +75,27 @@ const SideMenu = memo((props) => {
   */
   useEffect(async () => {
     let menuItems = document.querySelectorAll(".menu-item");
-    console.log("menuItems SideMenu", menuItems)
-    menuItems && menuItems.forEach((el) => {
-      el.addEventListener("click", (e) => {
-        const next = el.nextElementSibling;
-        removeActiveClassFromSubMenu();
-        menuItems.forEach((el) => el.classList.remove("active"));
-        el.classList.toggle("active");
-        if (next !== null) {
-          next.classList.toggle("active");
-        }
+    console.log("menuItems SideMenu", menuItems);
+    menuItems &&
+      menuItems.forEach((el) => {
+        el.addEventListener("click", (e) => {
+          const next = el.nextElementSibling;
+          removeActiveClassFromSubMenu();
+          menuItems.forEach((el) => el.classList.remove("active"));
+          el.classList.toggle("active");
+          if (next !== null) {
+            next.classList.toggle("active");
+          }
+        });
       });
-    });
-    console.log("from sidemenu", menuItemsTest(menuItemstest,props.allReportsData))
-    setAllReportsData(props.allReportsData)
-    setMenuItems(menuItemsTest(menuItemstest,props.allReportsData))
-    let val = await menuItemsTest(menuItemstest,props.allReportsData)
-    dispatch(updateMenuList(val))
+    console.log(
+      "from sidemenu",
+      menuItemsTest(menuItemstest, props.allReportsData)
+    );
+    setAllReportsData(props.allReportsData);
+    setMenuItems(menuItemsTest(menuItemstest, props.allReportsData));
+    let val = await menuItemsTest(menuItemstest, props.allReportsData);
+    dispatch(updateMenuList(val));
   }, [props.allReportsData]);
 
   // useEffect(()=> {
@@ -78,24 +103,24 @@ const SideMenu = memo((props) => {
 
   // }, [menuItems])
 
-  useEffect(()=> {
+  useEffect(() => {
     // dispatch(updateMenuList(menuList))
     let menuItems = document.querySelectorAll(".menu-item");
-    console.log("menuItems SideMenu", menuItems)
-    menuItems && menuItems.forEach((el) => {
-      el.addEventListener("click", (e) => {
-        const next = el.nextElementSibling;
-        removeActiveClassFromSubMenu();
-        menuItems.forEach((el) => el.classList.remove("active"));
-        el.classList.toggle("active");
-        if (next !== null) {
-          next.classList.toggle("active");
-        }
+    console.log("menuItems SideMenu", menuItems);
+    menuItems &&
+      menuItems.forEach((el) => {
+        el.addEventListener("click", (e) => {
+          const next = el.nextElementSibling;
+          removeActiveClassFromSubMenu();
+          menuItems.forEach((el) => el.classList.remove("active"));
+          el.classList.toggle("active");
+          if (next !== null) {
+            next.classList.toggle("active");
+          }
+        });
       });
-    });
-    setMenuItems(menuList)
-
-  }, [menuList])
+    setMenuItems(menuList);
+  }, [menuList]);
   return (
     <div
       className={`side-menu ${inactive ? "inactive" : ""}`}
@@ -126,24 +151,26 @@ const SideMenu = memo((props) => {
 
       <div className="main-menu">
         <ul>
-          {menuList && menuList?.map((menuItem, index) => (
-            <MenuItem
-              key={index}
-              name={menuItem.name}
-              exact={menuItem.exact}
-              to={menuItem.to}
-              subMenus={menuItem.subMenus || []}
-              iconClassName={menuItem.iconClassName}
-              isChecked={isChecked}
-              menuItem={menuItem}
-              onClick={(e) => {
-                if (inactive) {
-                  setInactive(false);
-                }
-                handleMenuSel(menuItem)
-              }}
-            />
-          ))}
+          {menuList &&
+            menuList?.map((menuItem, index) => (
+              <MenuItem
+                key={index}
+                name={menuItem.name}
+                exact={menuItem.exact}
+                to={menuItem.to}
+                subMenus={menuItem.subMenus || []}
+                iconClassName={menuItem.iconClassName}
+                isChecked={isChecked}
+                menuItem={menuItem}
+                onClick={(e) => {
+                  if (inactive) {
+                    setInactive(false);
+                  }
+                  handleMenuSel(menuItem);
+                }}
+                isActive={inactive}
+              />
+            ))}
 
           {/* <li>
             <a className="menu-item">
