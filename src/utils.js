@@ -14,7 +14,7 @@ export const menuItemsTest = (menuItems, allReportsData) => {
     {
       name: "Home",
       exact: true,
-      to: "/home/",
+      to: "/",
       iconClassName: "bi bi-speedometer2",
       component: "Home",
       subMenus: []
