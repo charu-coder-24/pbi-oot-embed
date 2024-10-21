@@ -117,7 +117,7 @@ const CategoryHierarchy = () => {
   }, [menuList])
 
   return (
-    <Container style={{ paddingTop: 20, maxWidth: "none" }}>
+    <Container style={{ maxWidth: "none" }}>
       
       {isEditMode ? (
         <>

@@ -6,6 +6,7 @@ import backgroundImage from "../assets/bgImg3.jpg"
 // import backgroundVedio from "../assets/iStock-1349830636.mp4"
 import { PowerBIEmbed } from "powerbi-client-react";
 import { models } from "powerbi-client";
+import LandingPage from './LandingPage/LandingPage';
 const boxStyle = {
     //   backgroundColor: 'green',
     margin: '8px',
@@ -23,8 +24,9 @@ const BoxComponent = ({ children }) => (
 );
 
 const Home = () => (
-    <div style={{paddingTop:"20px", paddingBottom:"20px", height:"inherit"}}>
-          <PowerBIEmbed
+    <div style={{ height:"inherit"}}>
+      <LandingPage />
+          {/* <PowerBIEmbed
         key={false}
           embedConfig={{
             type: "report", // Supported types: report, dashboard, tile, visual, qna, paginated report and create
@@ -88,8 +90,8 @@ const Home = () => (
           cssClassName={"embed-container"}
           getEmbeddedComponent={(embeddedReport) => {
             window.report = embeddedReport;
-          }}
-        />
+          }} */}
+        {/* /> */}
         {/* <div style={{ width: "98%", backgroundColor: "white", padding: "1em", display: "flex" }}> */}
             {/* <div style={{ width: "70%" }}> */}
                 {/* <video src={backgroundVedio} /> */}
