@@ -50,10 +50,7 @@ const Tiles = () => {
         </div>
       </div>
 
-     
-    </div>
-    <div className="grid">
-    <div className="tile wider">
+      <div className="tile">
         <img 
           src="https://images.unsplash.com/photo-1501523460185-2aa5d2a0f981?q=80&w=1862&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
           alt="Marketing View" 
@@ -68,7 +65,7 @@ const Tiles = () => {
         </div>
       </div>
 
-      <div className="tile wide">
+      <div className="tile">
         <img 
           src="https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
           alt="Supply Chain View" 
@@ -82,7 +79,25 @@ const Tiles = () => {
           </div>
         </div>
         </div>
-      </div>
+
+        <div className="tile">
+        <img 
+          src="https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+          alt="Supply Chain View" 
+        />
+        <div className="text">
+          <h1>Manufacturing View</h1>
+          <h2 className="animate-text">Optimize your supply chain operations.</h2>
+          <p className="animate-text">Forecast accuracy, manage risks, and improve efficiency.</p>
+          <div className="dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        </div>
+    </div>
+    {/* <div className="grid">
+   
+      </div> */}
     </>
     
   );

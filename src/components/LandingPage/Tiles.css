@@ -10,23 +10,15 @@ body {
 .wrap {
   margin: 50px 50px 0px 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic layout */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Dynamic layout */
   gap: 20px;
   max-width: 1200px;
   padding: 20px;
 }
 
-.grid{
-    margin: 0px 50px 50px 50px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); /* Dynamic layout */
-    gap: 20px;
-    max-width: 1200px;
-    padding: 20px;
-}
 .tile {
   position: relative;
-  height: 300px;
+  height: 350px;
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.95);
   box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, 0.44);

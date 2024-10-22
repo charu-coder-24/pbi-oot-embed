@@ -26,6 +26,54 @@ export const menuItemsTest = (menuItems, allReportsData) => {
     subMenus: [],
     component: "Admin"
   },
+  {
+    name: "Executive Dashboard",
+    exact: true,
+    to: `/report/executive-dashboard/*`,
+    iconClassName: "bi bi-file-earmark",
+    subMenus: [],
+    component: "Report"
+  },
+  {
+    name: "Finance",
+    exact: true,
+    to: `/report/finance/*`,
+    iconClassName: "bi bi-file-earmark",
+    subMenus: [],
+    component: "Report"
+  },
+  {
+    name: "Sales",
+    exact: true,
+    to: `/report/sales/*`,
+    iconClassName: "bi bi-file-earmark",
+    subMenus: [],
+    component: "Report"
+  },
+  {
+    name: "Marketting",
+    exact: true,
+    to: `/report/marketting/*`,
+    iconClassName: "bi bi-file-earmark",
+    subMenus: [],
+    component: "Report"
+  },
+  {
+    name: "Supply Chain",
+    exact: true,
+    to: `/report/supply-chain/*`,
+    iconClassName: "bi bi-file-earmark",
+    subMenus: [],
+    component: "Report"
+  },
+  {
+    name: "Manufacturing",
+    exact: true,
+    to: `/report/manufacturing/*`,
+    iconClassName: "bi bi-file-earmark",
+    subMenus: [],
+    component: "Report"
+  }
  
     // { name: "Dashboard", to: `/dashboard`, iconClassName: "bi bi-view-stacked", component: "Dashboard", subMenus:[] }
   ];
