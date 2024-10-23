@@ -86,7 +86,7 @@ const MenuItem = (props) => {
                       }}
                     >
                       <NavLink
-                        to={`/report/${report.name}`}
+                        to={`category/${name}/report/${report.name}`}
                         style={{
                           // background: "white",
                           borderBottom: "1px solid grey",

@@ -23,6 +23,7 @@ import { updateSelWorkspace, updateWorkspaces } from "./features/workspaces/work
 import MiniDrawer from "./Drawer";
 import Admin from "./components/pages/Admin/Admin";
 import Home from "./components/Home";
+import CategoryPage from "./components/CategoryLandingPage/CategoryPage";
 
 const powerbi = new service.Service(factories.hpmFactory, factories.wpmpFactory, factories.routerFactory);
 

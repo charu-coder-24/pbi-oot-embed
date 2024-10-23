@@ -10,6 +10,7 @@ import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import PrimarySearchAppBar from "./AppBar";
 import AppMenu from "./AppBar";
 import { isTokenExpired } from "../../../utils";
+import CategoryPage from "../../CategoryLandingPage/CategoryPage";
 
 
 const Report = (props) => {
@@ -26,7 +27,7 @@ const Report = (props) => {
   const updatedReports = useSelector((state) => state.reportReducer.updatedReports)
   const reportEditMode = useSelector((state) => state.reportReducer.reportEditMode)
   const [editMode, setEditMode] = useState("View");
-  const [selReport, setSelectedReport] = useState(updatedReports?.[0]);
+  const [selReport, setSelectedReport] = useState([]);
   const dispatch = useDispatch()
   console.log("hi called", reportEditMode, props)
   useEffect(() => {
@@ -56,6 +57,7 @@ const Report = (props) => {
 
   useEffect(() => {
     isTokenExpired()
+    console.log("testing reports rendered")
   }, []);
 
 
@@ -66,6 +68,7 @@ const Report = (props) => {
       {selReport !== undefined ? (
 
         <>
+
           <Box sx={{ flexGrow: 1 }}>
             <AppMenu report={selReport} />
           </Box>
@@ -142,7 +145,9 @@ const Report = (props) => {
 
 
         </>
-      ) : (<></>)}
+      ) : (
+      <CategoryPage {...props} />
+      )}
     </>
 
 

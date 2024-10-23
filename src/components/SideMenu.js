@@ -47,6 +47,7 @@ const SideMenu = memo((props) => {
           el.classList.remove("active");
         });
     setSelMenu(menuItem);
+    console.log("checking menu", menuItem);
   };
 
   useEffect(() => {
@@ -96,6 +97,18 @@ const SideMenu = memo((props) => {
     setMenuItems(menuItemsTest(menuItemstest, props.allReportsData));
     let val = await menuItemsTest(menuItemstest, props.allReportsData);
     dispatch(updateMenuList(val));
+
+    const url = window.location.pathname; // e.g., "/category/marketting/report/some-page"
+    const parts = url.split("/");
+
+    // Extract the category from the URL (2nd index, assuming fixed structure)
+    const category = parts[2]?.replace("-", " ");
+
+    // const menuList = useSelector((state) => state.menuListReducer.menuItems);
+    const menuItem = menuList.find(
+      (item) => item.name?.toLowerCase() === category?.toLowerCase()
+    )
+    handleMenuSel(menuItem)
   }, [props.allReportsData]);
 
   // useEffect(()=> {
@@ -121,6 +134,7 @@ const SideMenu = memo((props) => {
       });
     setMenuItems(menuList);
   }, [menuList]);
+
   return (
     <div
       className={`side-menu ${inactive ? "inactive" : ""}`}
