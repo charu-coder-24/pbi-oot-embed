@@ -140,7 +140,7 @@ const Report = (props) => {
                   },
                   pageNavigation: {
                     visible: true,
-                    position: models.PageNavigationPosition.Left,
+                    position: models.PageNavigationPosition.Bottom,
                   },
 
                   visualizations: {

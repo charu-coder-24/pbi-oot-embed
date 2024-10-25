@@ -75,7 +75,7 @@ const CategoryModal = ({
       name: category,
       subCategories: subcategory == "" ? [] : [subCategoryObj],
       exact: true,
-      to: "/report/*",
+      to: `/category/${category?.replace(" ","-")?.toLowerCase()}/report/*`,
       iconClassName: "bi bi-file-earmark",
       component: "Report",
       reports: subcategory == "" ? reports : [],
