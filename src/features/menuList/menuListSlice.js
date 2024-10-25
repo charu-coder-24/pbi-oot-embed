@@ -115,7 +115,7 @@ const initialState = {
           {
             id: "cacddc90-61b5-4cc6-b018-1f4785b97094",
             reportType: "PowerBIReport",
-            name: "Human Resources Sample PBIX",
+            name: "Cash Flow Monitoring",
             webUrl:
               "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/cacddc90-61b5-4cc6-b018-1f4785b97094",
             embedUrl:
@@ -131,7 +131,7 @@ const initialState = {
           {
             id: "d4558ade-26d8-4fb6-8646-5e0c14e77d01",
             reportType: "PowerBIReport",
-            name: "Untitled report",
+            name: "Expense Analysis",
             webUrl:
               "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/d4558ade-26d8-4fb6-8646-5e0c14e77d01",
             embedUrl:
@@ -147,7 +147,7 @@ const initialState = {
           {
             id: "053548c2-20d2-42d5-bac4-a34a3b0fd6c2",
             reportType: "PowerBIReport",
-            name: "Project Sunlight Safety Performance (Charu)",
+            name: "Probablity Distribution",
             webUrl:
               "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/053548c2-20d2-42d5-bac4-a34a3b0fd6c2",
             embedUrl:
@@ -159,23 +159,7 @@ const initialState = {
             users: [],
             subscriptions: [],
             sections: [],
-          },
-          {
-            id: "3baf7644-a20b-4280-9b0c-d67c3d4b1399",
-            reportType: "PowerBIReport",
-            name: "Project Sunlight Safety Performance multilangual",
-            webUrl:
-              "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/3baf7644-a20b-4280-9b0c-d67c3d4b1399",
-            embedUrl:
-              "https://app.powerbi.com/reportEmbed?reportId=3baf7644-a20b-4280-9b0c-d67c3d4b1399&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
-            isFromPbix: true,
-            isOwnedByMe: true,
-            datasetId: "4c14efde-0313-4e31-910a-00e10dc1313b",
-            datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
-            users: [],
-            subscriptions: [],
-            sections: [],
-          },
+          }
         ],
       },
       {
@@ -377,20 +361,17 @@ const initialState = {
         component: "Report",
         reports: [
           {
-            id: "f6e3e1d8-cd1e-45e6-a9d7-2579b3b006b7",
-            reportType: "PowerBIReport",
-            name: "Project Sunlight Safety Performance multilangual(copy)",
-            webUrl:
-              "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/f6e3e1d8-cd1e-45e6-a9d7-2579b3b006b7",
-            embedUrl:
-              "https://app.powerbi.com/reportEmbed?reportId=f6e3e1d8-cd1e-45e6-a9d7-2579b3b006b7&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
-            isFromPbix: true,
-            isOwnedByMe: true,
-            datasetId: "73a121c9-0462-40cf-96ec-0effcc492f3f",
-            datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
-            users: [],
-            subscriptions: [],
-            sections: [],
+            "@odata.context": "https://wabi-us-east2-b-primary-redirect.analysis.windows.net/v1.0/myorg/$metadata#reports/$entity",
+            "id": "142c8903-1031-4ef2-a499-a309443b73ac",
+            "reportType": "PowerBIReport",
+            "name": "OEE",
+            "webUrl": "https://app.powerbi.com/groups/me/reports/142c8903-1031-4ef2-a499-a309443b73ac",
+            "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=142c8903-1031-4ef2-a499-a309443b73ac&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+            "isOwnedByMe": true,
+            "datasetId": "016efe9b-b329-4d8e-9a2c-66b1b18f530a",
+            "users": [],
+            "subscriptions": [],
+            "sections": []
           },
           {
             "@odata.context": "https://wabi-us-east2-b-primary-redirect.analysis.windows.net/v1.0/myorg/$metadata#reports/$entity",
@@ -407,13 +388,13 @@ const initialState = {
           },
           {
             "@odata.context": "https://wabi-us-east2-b-primary-redirect.analysis.windows.net/v1.0/myorg/$metadata#reports/$entity",
-            "id": "8deab412-8600-486f-af5d-e993c50960bb",
+            "id": "3787a2d3-2bc8-4c1a-8b9f-adaa3f12eec0",
             "reportType": "PowerBIReport",
-            "name": "Campaign Performance",
-            "webUrl": "https://app.powerbi.com/groups/me/reports/8deab412-8600-486f-af5d-e993c50960bb",
-            "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=8deab412-8600-486f-af5d-e993c50960bb&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+            "name": "Quality",
+            "webUrl": "https://app.powerbi.com/groups/me/reports/3787a2d3-2bc8-4c1a-8b9f-adaa3f12eec0",
+            "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=3787a2d3-2bc8-4c1a-8b9f-adaa3f12eec0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
             "isOwnedByMe": true,
-            "datasetId": "656ac04d-63e6-4f13-8054-a6154f550701",
+            "datasetId": "362eb226-506d-4c81-b0b3-9e2ac171f7b0",
             "users": [],
             "subscriptions": [],
             "sections": []

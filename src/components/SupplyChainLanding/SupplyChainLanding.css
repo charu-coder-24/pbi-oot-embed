@@ -1,0 +1,123 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    height: 100%;
+    width: 75%;
+  }
+  
+  .tile-link {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+  }
+  .tile-team-update {
+    text-decoration: none;
+    /* width: 100%; */
+    height: 100%;
+    padding: 40px 0;
+  }
+  
+  .tile-content {
+    position: relative;
+    height: 100%;
+    border-radius: 10px;
+    color: white;
+    /* display: flex; */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+  .tile-content-main {
+    position: relative;
+    height: 100%;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+  
+  .tile-content:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+  }
+  
+  .tile-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+    border-radius: 10px;
+  }
+  
+  .tile-title {
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+    color: darkblue;
+    font-weight: 700;
+    width: 50%;
+    align-items: center;
+    margin-left: 3em;
+  }
+  .tile-title-main {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    color: darkblue;
+    font-weight: 700;
+    /* width: 50%; */
+    align-items: center;
+    /* margin-left: 3em; */
+    padding: 2.5em;
+  }
+  
+  .metrics-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5em;
+    width: 100%;
+  }
+  
+  .metrics-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .positive {
+    color: #4caf50;
+  }
+  
+  .negative {
+    color: #f44336;
+  }
+  
+  .arrow {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 2rem;
+    color: #1e90ff;
+  }
+  
+  /* Make the 'Team Updates' tile twice the height */
+  .large-tile {
+    grid-row: span 2; /* Spans two rows in the grid */
+    height: 520px; /* Adjust height */
+  }
+  
