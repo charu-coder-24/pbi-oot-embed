@@ -39,7 +39,12 @@ const Report = (props) => {
   const [selReport, setSelectedReport] = useState([]);
   const location = useLocation()
   const dispatch = useDispatch();
-  console.log("hi called", reportEditMode, props,location.pathname)
+  console.log("hi called previous", updatedReports, location.pathname
+    .split("/")
+    ?.slice(4)
+    ?.join("")
+    ?.replace("%20", "-")
+    ?.toLowerCase())
 
   useEffect(() => {
     let selectedReport = updatedReports?.find(
@@ -57,8 +62,9 @@ const Report = (props) => {
             ?.toLowerCase()
     );
     console.log(
-      "hi called select",
-      location?.pathname.split("/")?.slice(4).join(""),
+      "hi called after",
+      updatedReports,
+      location?.pathname.split("/")?.slice(4),
       location?.pathname,
            
       selectedReport,
@@ -66,7 +72,7 @@ const Report = (props) => {
     );
 
     setSelectedReport(selectedReport);
-  }, [location.pathname]);
+  }, [props.location.pathname]);
 
   const handlePBIViewMode = () => {
     if (editMode == "View") {
