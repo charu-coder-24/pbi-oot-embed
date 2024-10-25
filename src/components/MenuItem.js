@@ -91,11 +91,11 @@ const MenuItem = (props) => {
                           // background: "white",
                           borderBottom: "1px solid grey",
                           backgroundColor:
-                            report.id == subcategoryReportSel || report?.name == window.location.pathname?.replace("%20"," ").split("/")?.slice(4).join("")
+                            report?.name == window.location.pathname?.replace("%20"," ").split("/")?.slice(4).join("")
                               ? "aquamarine"
                               : "",
                           fontWeight:
-                            report.id == subcategoryReportSel || report?.name == window.location.pathname?.replace("%20"," ").split("/")?.slice(4).join("")
+                            report?.name == window.location.pathname?.replace("%20"," ").split("/")?.slice(4).join("")
                               ? "bold"
                               : "inherit",
                           cursor: "pointer",
