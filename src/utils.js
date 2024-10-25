@@ -32,6 +32,32 @@ export const menuItemsTest = (menuItems, allReportsData) => {
       component: "Admin",
     },
     {
+      name: "Executive",
+      subCategories: [],
+      exact: true,
+      to: "/category/Executive/report/*",
+      iconClassName: "bi bi-file-earmark",
+      component: "Report",
+      reports: [
+        {
+          id: "a01134a2-915a-4b4a-8d79-ba9c2e0ebf90",
+          reportType: "PowerBIReport",
+          name: "v1.5_Global Dashboard",
+          webUrl:
+            "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/a01134a2-915a-4b4a-8d79-ba9c2e0ebf90",
+          embedUrl:
+            "https://app.powerbi.com/reportEmbed?reportId=a01134a2-915a-4b4a-8d79-ba9c2e0ebf90&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+          isFromPbix: true,
+          isOwnedByMe: true,
+          datasetId: "82d03066-fcad-4f66-9a4d-08ed54683e79",
+          datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
+          users: [],
+          subscriptions: [],
+          sections: [],
+        },
+      ],
+    },
+    {
       name: "Sales",
       subCategories: [],
       exact: true,
@@ -164,10 +190,10 @@ export const menuItemsTest = (menuItems, allReportsData) => {
       ],
     },
     {
-      name: "Marketting",
+      name: "Marketing",
       subCategories: [],
       exact: true,
-      to: "/category/marketting/report/*",
+      to: "/category/marketing/report/*",
       iconClassName: "bi bi-file-earmark",
       component: "Report",
       reports: [
@@ -223,77 +249,137 @@ export const menuItemsTest = (menuItems, allReportsData) => {
     },
     {
       name: "Supply Chain",
-      subCategories: [],
+      "subCategories": [
+          {
+              "name": "Demand Planning",
+              "reports": [
+                  {
+                      "id": "9a3b9438-63a4-417c-a593-786e59c5f5da",
+                      "reportType": "PowerBIReport",
+                      "name": "Sales & Returns Sample",
+                      "webUrl": "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/9a3b9438-63a4-417c-a593-786e59c5f5da",
+                      "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=9a3b9438-63a4-417c-a593-786e59c5f5da&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                      "isFromPbix": true,
+                      "isOwnedByMe": true,
+                      "datasetId": "1675982d-ec77-49b8-9e03-fa6f62a7156e",
+                      "datasetWorkspaceId": "6cceba03-8d48-4e74-a924-fd93b2b03656",
+                      "users": [],
+                      "subscriptions": [],
+                      "sections": []
+                  },
+                  {
+                      "id": "cacddc90-61b5-4cc6-b018-1f4785b97094",
+                      "reportType": "PowerBIReport",
+                      "name": "Human Resources Sample PBIX",
+                      "webUrl": "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/cacddc90-61b5-4cc6-b018-1f4785b97094",
+                      "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=cacddc90-61b5-4cc6-b018-1f4785b97094&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                      "isFromPbix": true,
+                      "isOwnedByMe": true,
+                      "datasetId": "e21f9ccd-454d-4249-9c31-2746a1de0d08",
+                      "datasetWorkspaceId": "6cceba03-8d48-4e74-a924-fd93b2b03656",
+                      "users": [],
+                      "subscriptions": [],
+                      "sections": []
+                  }
+              ],
+              "exact": true,
+              "to": "/report/",
+              "iconClassName": "bi bi-file-earmark",
+              "component": "Report",
+              "isOpen": false
+          },
+          {
+              "name": "Supply Planning",
+              "reports": [
+                  {
+                      "id": "d6f6dd7d-6726-4d2c-9671-08bef70efafa",
+                      "reportType": "PowerBIReport",
+                      "name": "Project Sunlight Safety Performance multilangual V1.1 pbix",
+                      "webUrl": "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/d6f6dd7d-6726-4d2c-9671-08bef70efafa",
+                      "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=d6f6dd7d-6726-4d2c-9671-08bef70efafa&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                      "isFromPbix": true,
+                      "isOwnedByMe": true,
+                      "datasetId": "02c51735-6843-4e8c-9543-a9569b488da3",
+                      "datasetWorkspaceId": "6cceba03-8d48-4e74-a924-fd93b2b03656",
+                      "users": [],
+                      "subscriptions": [],
+                      "sections": []
+                  },
+                  {
+                      "id": "dc3649f7-3de7-4c47-9472-d6b8281834bb",
+                      "reportType": "PowerBIReport",
+                      "name": "Project Sunlight Safety Performance multilangual V1.2 pbix",
+                      "webUrl": "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/dc3649f7-3de7-4c47-9472-d6b8281834bb",
+                      "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=dc3649f7-3de7-4c47-9472-d6b8281834bb&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                      "isFromPbix": true,
+                      "isOwnedByMe": true,
+                      "datasetId": "80712502-0143-46e9-8d2d-6c638d5912f4",
+                      "datasetWorkspaceId": "6cceba03-8d48-4e74-a924-fd93b2b03656",
+                      "users": [],
+                      "subscriptions": [],
+                      "sections": []
+                  }
+              ],
+              "exact": true,
+              "to": "/report/",
+              "iconClassName": "bi bi-file-earmark",
+              "component": "Report",
+              "isOpen": false
+          },
+          {
+              "name": "Warehouse",
+              "reports": [
+                  {
+                      "id": "3baf7644-a20b-4280-9b0c-d67c3d4b1399",
+                      "reportType": "PowerBIReport",
+                      "name": "Project Sunlight Safety Performance multilangual",
+                      "webUrl": "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/3baf7644-a20b-4280-9b0c-d67c3d4b1399",
+                      "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=3baf7644-a20b-4280-9b0c-d67c3d4b1399&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                      "isFromPbix": true,
+                      "isOwnedByMe": true,
+                      "datasetId": "4c14efde-0313-4e31-910a-00e10dc1313b",
+                      "datasetWorkspaceId": "6cceba03-8d48-4e74-a924-fd93b2b03656",
+                      "users": [],
+                      "subscriptions": [],
+                      "sections": []
+                  }
+              ],
+              "exact": true,
+              "to": "/report/",
+              "iconClassName": "bi bi-file-earmark",
+              "component": "Report",
+              "isOpen": false
+          },
+          {
+              "name": "Logistics",
+              "reports": [
+                  {
+                      "id": "3787a2d3-2bc8-4c1a-8b9f-adaa3f12eec0",
+                      "reportType": "PowerBIReport",
+                      "name": "PBI Report_Datamart",
+                      "webUrl": "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/3787a2d3-2bc8-4c1a-8b9f-adaa3f12eec0",
+                      "embedUrl": "https://app.powerbi.com/reportEmbed?reportId=3787a2d3-2bc8-4c1a-8b9f-adaa3f12eec0&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                      "isFromPbix": false,
+                      "isOwnedByMe": true,
+                      "datasetId": "362eb226-506d-4c81-b0b3-9e2ac171f7b0",
+                      "datasetWorkspaceId": "6cceba03-8d48-4e74-a924-fd93b2b03656",
+                      "users": [],
+                      "subscriptions": [],
+                      "sections": []
+                  }
+              ],
+              "exact": true,
+              "to": "/report/",
+              "iconClassName": "bi bi-file-earmark",
+              "component": "Report",
+              "isOpen": false
+          }
+      ],
       exact: true,
       to: "/category/supply-chain/report/*",
       iconClassName: "bi bi-file-earmark",
       component: "Report",
-      reports: [
-        {
-          id: "dc3649f7-3de7-4c47-9472-d6b8281834bb",
-          reportType: "PowerBIReport",
-          name: "Project Sunlight Safety Performance multilangual V1.2 pbix",
-          webUrl:
-            "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/dc3649f7-3de7-4c47-9472-d6b8281834bb",
-          embedUrl:
-            "https://app.powerbi.com/reportEmbed?reportId=dc3649f7-3de7-4c47-9472-d6b8281834bb&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
-          isFromPbix: true,
-          isOwnedByMe: true,
-          datasetId: "80712502-0143-46e9-8d2d-6c638d5912f4",
-          datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
-          users: [],
-          subscriptions: [],
-          sections: [],
-        },
-        {
-          id: "ee94282d-8306-4f84-8e34-e1ede972e37d",
-          reportType: "PowerBIReport",
-          name: "Project Sunlight Safety Performance V1.4 pbix",
-          webUrl:
-            "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/ee94282d-8306-4f84-8e34-e1ede972e37d",
-          embedUrl:
-            "https://app.powerbi.com/reportEmbed?reportId=ee94282d-8306-4f84-8e34-e1ede972e37d&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
-          isFromPbix: true,
-          isOwnedByMe: true,
-          datasetId: "f9b9c3fb-6a7a-42f7-9442-c263f36b939b",
-          datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
-          users: [],
-          subscriptions: [],
-          sections: [],
-        },
-        {
-          id: "ec72db50-de05-4135-bbe7-eac5a5aa9c03",
-          reportType: "PowerBIReport",
-          name: "PBI_REPORT_DATAMART2",
-          webUrl:
-            "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/ec72db50-de05-4135-bbe7-eac5a5aa9c03",
-          embedUrl:
-            "https://app.powerbi.com/reportEmbed?reportId=ec72db50-de05-4135-bbe7-eac5a5aa9c03&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
-          isFromPbix: false,
-          isOwnedByMe: true,
-          datasetId: "362eb226-506d-4c81-b0b3-9e2ac171f7b0",
-          datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
-          users: [],
-          subscriptions: [],
-          sections: [],
-        },
-        {
-          id: "c02a86b8-f480-4bcd-9366-6a233901180b",
-          reportType: "PowerBIReport",
-          name: "formula1 POC",
-          webUrl:
-            "https://app.powerbi.com/groups/6cceba03-8d48-4e74-a924-fd93b2b03656/reports/c02a86b8-f480-4bcd-9366-6a233901180b",
-          embedUrl:
-            "https://app.powerbi.com/reportEmbed?reportId=c02a86b8-f480-4bcd-9366-6a233901180b&groupId=6cceba03-8d48-4e74-a924-fd93b2b03656&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLUVBU1QyLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
-          isFromPbix: true,
-          isOwnedByMe: true,
-          datasetId: "6e4c1679-1207-407e-b687-aec9369a6b4c",
-          datasetWorkspaceId: "6cceba03-8d48-4e74-a924-fd93b2b03656",
-          users: [],
-          subscriptions: [],
-          sections: [],
-        },
-      ],
+      reports: []
     },
     {
       name: "Manufacturing",
@@ -461,7 +547,6 @@ export const menuItemsTest = (menuItems, allReportsData) => {
     return obj;
   });
 
-  console.log("testing 1234", menuItems, menuItem);
   // let updatedMenuItemList = menuItem
   // updatedMenuItemList.splice(2, 0,
   //   {

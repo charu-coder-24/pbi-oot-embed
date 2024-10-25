@@ -158,16 +158,16 @@ export default function MiniDrawer() {
   async function fetchWorkspaces() {
     try {
       const res = await getMyOrgWorkspaces();
-      console.log("outside this function")
+      // console.log("outside this function")
 
       setWorkspaces(res)
 
       dispatch(updateSelWorkspace(res))
       dispatch(updateWorkspaces(res))
-      console.log("inside this function")
+      // console.log("inside this function")
       await fetchAllReports(res)
         .then(allReports => {
-          console.log("All Reports:", allReports);
+          // console.log("All Reports:", allReports);
           dispatch(addAllReportsData(allReports))
           dispatch(updateReports(allReports))
           // setAllReportsData(allReports)
@@ -196,7 +196,7 @@ export default function MiniDrawer() {
       const reports = await getAllReports(item.id);
       allReports = allReports.concat(reports.value);
     }
-    console.log("reports before sending", allReports)
+    // console.log("reports before sending", allReports)
     return allReports;
   }
 
@@ -209,7 +209,7 @@ export default function MiniDrawer() {
   };
 
   React.useEffect(() => {
-    console.log("hey")
+    // console.log("hey")
   }, [])
   return (
     <Box sx={{ display: 'flex' }}>

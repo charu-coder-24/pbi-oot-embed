@@ -15,7 +15,7 @@ const LandingPage = () => {
           Your browser does not support the video tag.
         </video>
       <main className="main-content">
-
+          <div style={{fontSize:"45px", fontWeight:"bold", marginBottom:"-30px"}}>Supply Chain Control Tower</div>
           <Tiles /> {/* Render the animated tiles */}
       </main>
     </div>

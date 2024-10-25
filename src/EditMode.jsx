@@ -83,7 +83,7 @@ const EditMode = ({ categories, open, onClose }) => {
     setData(updatedData);
     dispatch(updateMenuList(updatedData));
     setSelectedCategory(null);
-    console.log("after deletion", menuList, updatedData, selectedCategory, selCategory)
+    // console.log("after deletion", menuList, updatedData, selectedCategory, selCategory)
   };
 
   const handleUpdateCategory = () => {
@@ -93,7 +93,7 @@ const EditMode = ({ categories, open, onClose }) => {
     );
     let test = {...data}
     test.subCategories = updatedData
-    console.log("updtaed category", selectedCategory,editCategoryName,data,test)
+    // console.log("updtaed category", selectedCategory,editCategoryName,data,test)
 
     setData(test);
     // dispatch(updateMenuList(updatedData));
@@ -109,20 +109,20 @@ const EditMode = ({ categories, open, onClose }) => {
     }
     const updatedData = data?.subCategories?.map((category) =>
       {
-        console.log("checking this now",category.to,selectedCategory.to)
+        // console.log("checking this now",category.to,selectedCategory.to)
         return category.to === selectedCategory.to ? { ...category, report: [...category?.report, newSubCategory] } : category}
     );
-    console.log("sub category selected from drop down",data,updatedData,selectedCategory)
+    // console.log("sub category selected from drop down",data,updatedData,selectedCategory)
     menuListDummy = menuListDummy?.map((category) => 
     category.name === "OOT" ? { ...category,testArray : {...category?.testArray[0], subCategories : updatedData}} : category
  )
- console.log("testing addition",menuList,menuListDummy);
+//  console.log("testing addition",menuList,menuListDummy);
     // setData(updatedData);
     // dispatch(updateMenuList(updatedData));
   };
 
   const handleEditSubcategory = (subMenu) => {
-    console.log("after edit sub", selectedCategory, subMenu,editSubcategoryName)
+    // console.log("after edit sub", selectedCategory, subMenu,editSubcategoryName)
     setSelectedSubcategory(subMenu)
     setIsSubcategoryEditMode(true);
     setEditSubcategoryName(subMenu?.name);
@@ -135,7 +135,7 @@ const EditMode = ({ categories, open, onClose }) => {
         : category
     );
     let selCategory = updatedData?.find((category) => category.name == selectedCategory.name)
-    console.log("delet", updatedData, selectedCategory,selSubMenu)
+    // console.log("delet", updatedData, selectedCategory,selSubMenu)
     setSelectedCategory(selCategory)
     setData(updatedData);
     dispatch(updateMenuList(updatedData));
@@ -145,7 +145,7 @@ const EditMode = ({ categories, open, onClose }) => {
   const handleUpdateSubcategory = () => {
     const updatedData = data?.map((category) =>
     {
-      console.log("submenu sub",  category.name === selectedCategory.name,category,selectedCategory )
+      // console.log("submenu sub",  category.name === selectedCategory.name,category,selectedCategory )
       return category.name === selectedCategory.name
       ? {
         ...category,
@@ -159,7 +159,7 @@ const EditMode = ({ categories, open, onClose }) => {
     
     );
     let selCategory = updatedData?.find((category) => category.name == selectedCategory.name)
-    console.log("update sub",selCategory )
+    // console.log("update sub",selCategory )
     
     setSelectedCategory(selCategory)
     setData(updatedData);
@@ -187,7 +187,7 @@ const EditMode = ({ categories, open, onClose }) => {
   // },[menuList])
 
   const setSelectedExistingCategory = (d) => {
-    console.log("testing",d)
+    // console.log("testing",d)
   }
   return (
     <Dialog open={true} onClose={handleClose} maxWidth="lg" fullWidth>
@@ -235,7 +235,7 @@ const EditMode = ({ categories, open, onClose }) => {
                 id="existing-category"
                 value={data?.subCategories}
                 onChange={(e) => {
-                  console.log("testing right away",e.target.value)
+                  // console.log("testing right away",e.target.value)
                   setSelectedCategory(e.target.value)
                 }}
                 label={data?.name}

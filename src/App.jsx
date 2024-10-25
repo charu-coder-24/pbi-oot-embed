@@ -1,9 +1,20 @@
 import "./App.scss";
 import SideMenu, { menuItems } from "./components/SideMenu";
-import { AuthenticationResult, InteractionType, EventMessage, EventType, AuthError } from "@azure/msal-browser";
+import {
+  AuthenticationResult,
+  InteractionType,
+  EventMessage,
+  EventType,
+  AuthError,
+} from "@azure/msal-browser";
 import { MsalContext, useMsal } from "@azure/msal-react";
 import React, { useEffect, useRef, useState } from "react";
-import { service, factories, models, IEmbedConfiguration } from "powerbi-client";
+import {
+  service,
+  factories,
+  models,
+  IEmbedConfiguration,
+} from "powerbi-client";
 // import "./App.css";
 import * as config from "./Config";
 
@@ -13,19 +24,36 @@ import Workspace from "./components/pages/Workspace/Workspace";
 import Tiles from "./components/pages/Tiles/Tiles";
 import Report from "./components/pages/Report/Report";
 import { MsalProvider } from "@azure/msal-react";
-import { authenticateToken, getAllReports, getMyOrgWorkspaces, isTokenExpired, login } from "./utils";
+import {
+  authenticateToken,
+  getAllReports,
+  getMyOrgWorkspaces,
+  isTokenExpired,
+  login,
+} from "./utils";
 import BasicModal from "./components/MultiActionAreaCard";
 import MultiActionAreaCard from "./components/MultiActionAreaCard";
 import LoginScreen from "./components/pages/Login Screen/LoginScreen";
-import { connect, useDispatch, useSelector } from "react-redux"
-import { addAllReportsData, updateReports } from "./features/reports/reportSlice";
-import { updateSelWorkspace, updateWorkspaces } from "./features/workspaces/workspaceSlice";
+import { connect, useDispatch, useSelector } from "react-redux";
+import {
+  addAllReportsData,
+  updateReports,
+} from "./features/reports/reportSlice";
+import {
+  updateSelWorkspace,
+  updateWorkspaces,
+} from "./features/workspaces/workspaceSlice";
 import MiniDrawer from "./Drawer";
 import Admin from "./components/pages/Admin/Admin";
 import Home from "./components/Home";
 import CategoryPage from "./components/CategoryLandingPage/CategoryPage";
+import LoadingScreen from "./components/LoadingScreen";
 
-const powerbi = new service.Service(factories.hpmFactory, factories.wpmpFactory, factories.routerFactory);
+const powerbi = new service.Service(
+  factories.hpmFactory,
+  factories.wpmpFactory,
+  factories.routerFactory
+);
 
 const Dashboard = () => <h1>Dashboard</h1>;
 const Content = () => <h1>Content</h1>;
@@ -41,175 +69,189 @@ let embedUrl = "";
 // let isAuthenticated = sessionStorage.getItem("access_token") ? true : false
 
 function App({ msalInstance }) {
-    const [inactive, setInactive] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
-    const [selectedWorkspace, setSelWorkspace] = useState(
-        "6cceba03-8d48-4e74-a924-fd93b2b03656"
-    );
-    const [allReportsData, setAllReportsData] = useState([]);
-    const [selId, setSelId] = useState(-1);
-    const { instance, accounts, inProgress } = useMsal();
-    const [tokenState, setTokenState] = useState({ accessToken: "", embedUrl: "", error: [] });
-    const [tokenStatus, setTokenStatus] = useState(false)
-    const [isAuthenticated, setAuthenticated] = useState(accounts?.length > 0 ? true : false)
-    const [workspaces, setWorkspaces] = useState([])
-    const [selMenu, setSelMenu] = useState()
-    let selectedWorkspces = sessionStorage.getItem("selectedWorkspaces")?.split(",");
-    const dispatch = useDispatch()
-    const reports = useSelector((state) => state.reportReducer.allReportsData)
-    const reportEditMode = useSelector((state) => state.reportReducer.reportEditMode)
-    const updatedReports = useSelector((state) => state.reportReducer.updatedReports)
-    const menuList = useSelector((state) => state.menuListReducer.menuItems)
+  const [inactive, setInactive] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [selectedWorkspace, setSelWorkspace] = useState(
+    "6cceba03-8d48-4e74-a924-fd93b2b03656"
+  );
+  const [allReportsData, setAllReportsData] = useState([]);
+  const [selId, setSelId] = useState(-1);
+  const { instance, accounts, inProgress } = useMsal();
+  const [tokenState, setTokenState] = useState({
+    accessToken: "",
+    embedUrl: "",
+    error: [],
+  });
+  const [tokenStatus, setTokenStatus] = useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(
+    accounts?.length > 0 ? true : false
+  );
+  //   const [workspaces, setWorkspaces] = useState([]);
+  const [selMenu, setSelMenu] = useState();
+  let selectedWorkspces = sessionStorage
+    .getItem("selectedWorkspaces")
+    ?.split(",");
+  const dispatch = useDispatch();
+  const reports = useSelector((state) => state.reportReducer.allReportsData);
+  const reportEditMode = useSelector(
+    (state) => state.reportReducer.reportEditMode
+  );
+  const updatedReports = useSelector(
+    (state) => state.reportReducer.updatedReports
+  );
+  const menuList = useSelector((state) => state.menuListReducer.menuItems);
+  const workspaces = useSelector((state) => state.workspaceReducer.workspaces);
+  const [loadingScreen, setLoadingScreen] = useState(true);
 
-    useEffect( () => {
-        if (isTokenExpired()) {
-            setTokenStatus(true)
-        }
-    }, []);
-
-
-    const handleLogin = async () => {
-        if (sessionStorage.getItem("access_token")) {
-            setAuthenticated(true)
-        }
-        await authenticateToken(instance, accounts, inProgress, tokenState);
+  useEffect(() => {
+    if (isTokenExpired()) {
+      setTokenStatus(true);
     }
+  }, []);
 
-    useEffect(() => {
-        if (accounts.length > 0) {
-            setAuthenticated(true)
-        }
-        if (accessToken == null) {
-            authenticateToken(instance, accounts, inProgress, tokenState);
-        } else {
-            fetchWorkspaces();
-        }
-        console.log("from redux store app", reports)
+  useEffect(()=>{
+    console.log("loading screen", loadingScreen)
+  },[loadingScreen])
 
-    }, [])
-
-
-    useEffect(() => {
-        if (sessionStorage.getItem("access_token") && !isAuthenticated) {
-            setAuthenticated(true)
-            if (workspaces.length == 0) {
-                fetchWorkspaces();
-            }
-        }
-    }, accessToken)
-
-
-    async function fetchWorkspaces() {
-        try {
-            const res = await getMyOrgWorkspaces();
-            // console.log("outside this function")
-
-            setWorkspaces(res)
-
-            dispatch(updateSelWorkspace(res))
-            dispatch(updateWorkspaces(res))
-            // console.log("inside this function")
-            await fetchAllReports(res)
-                .then(allReports => {
-                    // console.log("All Reports:", allReports);
-                    dispatch(addAllReportsData(allReports))
-                    dispatch(updateReports(allReports))
-                    setAllReportsData(allReports)
-                })
-                .catch(error => {
-                    console.error("Error fetching reports:", error.message);
-                });
-
-        } catch (error) {
-            console.error("Error fetching workspaces:", error);
-        }
+  const handleLogin = async () => {
+    if (sessionStorage.getItem("access_token")) {
+      setAuthenticated(true);
     }
+    await authenticateToken(instance, accounts, inProgress, tokenState);
+  };
 
-
-    const updateAuthenticateStatus = async () => {
-        setAuthenticated(true)
-        if (workspaces == []) {
-            await fetchWorkspaces()
-        }
+  useEffect(() => {
+    if (accounts.length > 0) {
+      setAuthenticated(true);
     }
+    if (accessToken == null) {
+      authenticateToken(instance, accounts, inProgress, tokenState);
+    } else {
+      
+        fetchWorkspaces();
 
-    async function fetchAllReports(workspaces) {
-        let allReports = [];
-
-        for (const item of workspaces) {
-            const reports = await getAllReports(item.id);
-            allReports = allReports.concat(reports.value);
-        }
-        // console.log("reports before sending", allReports)
-        return allReports;
     }
+  }, []);
 
-    const updateReportsSequence = (list) => {
-        setAllReportsData(list)
+  useEffect(() => {
+    if (sessionStorage.getItem("access_token") && !isAuthenticated) {
+      setAuthenticated(true);
+      if (workspaces.length == 0) {
+        fetchWorkspaces();
+      }
     }
-    console.log("edit mode app", reportEditMode)
-    useEffect(() => {
+  }, accessToken);
 
-    }, [reportEditMode])
-    // console.log("from report state", allReportsData)
-    return (
-        // <div>hi</div>
-        // <MsalProvider instance={msalInstance}>
-        // <MultiActionAreaCard />
-        // <MiniDrawer />
-        <div className="App">
-            {!isAuthenticated ? (
-                // <MultiActionAreaCard handleLogin = {handleLogin}/>
-                <LoginScreen handleLogin={handleLogin} updateAuthenticateStatus={updateAuthenticateStatus} />
+  async function fetchWorkspaces() {
+    try {
+      const res = await getMyOrgWorkspaces();
+      // console.log("outside this function")
 
-            ) : (
-                <Router>
-                    <SideMenu
-                        onCollapse={(inactive) => {
-                            setInactive(inactive);
-                        }}
-                        handleToggle={(isChecked) => {
-                            setIsChecked(!isChecked);
-                        }}
-                        workspaceId={selectedWorkspace}
-                        allReportsData={updatedReports}
-                    />
+      //   setWorkspaces(res);
 
-                    <div
-                        className={`container ${inactive ? "inactive" : ""}`}
-                        style={{ backgroundColor: `${isChecked ? "#f4f9f4" : "#666"}` }}
-                    >
+      dispatch(updateSelWorkspace(res));
+      dispatch(updateWorkspaces(res));
+      // console.log("inside this function")
+      await fetchAllReports(res)
+        .then((allReports) => {
+          // console.log("All Reports:", allReports);
+          dispatch(addAllReportsData(allReports));
+          dispatch(updateReports(allReports));
+          setAllReportsData(allReports);
+          setLoadingScreen(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching reports:", error.message);
+        });
+    } catch (error) {
+      console.error("Error fetching workspaces:", error);
+    }
+  }
 
+  const updateAuthenticateStatus = async () => {
+    setAuthenticated(true);
+    if (workspaces == []) {
+      await fetchWorkspaces();
+    }
+  };
 
-                        {/* <Route
-                            exact={true}
-                            path="/"
-                            component={Workspace}
-                        />
-                        <Route exact={true} path="/home/dashboard" component={Dashboard} />
+  async function fetchAllReports(workspaces) {
+    let allReports = [];
 
-                        <Route exact={true} path="/home/report/*"  render={(props) => <Report {...props}/>} />
-                        <Route exact={true} path="/report"  render={(props) => <Report {...props}/>}  /> */}
+    for (const item of workspaces) {
+      const reports = await getAllReports(item.id);
+      allReports = allReports.concat(reports.value);
+    }
+    console.log("reports before sending", allReports);
+    sessionStorage.setItem("isFetchingDone", true);
+    return allReports;
+  }
 
-                        {menuList?.map((route,i) => (
-                            route.component != "Report" ? 
-                            <Route key={i} exact={true} path={route.to} component={route.component == "Home" ? Home : Admin} /> :
-                            <Route key={i} exact={true} path={route.to}  render={(props) => <Report {...props}/>}/> 
-                        ))}
-                    </div>
-                </Router>
+  const updateReportsSequence = (list) => {
+    setAllReportsData(list);
+  };
+  useEffect(() => {}, [reportEditMode]);
+  // console.log("from report state", allReportsData)
+  return (
+    // <div>hi</div>
+    // <MsalProvider instance={msalInstance}>
+    // <MultiActionAreaCard />
+    // <MiniDrawer />
+    <div className="App">
+      {!isAuthenticated ? (
+        // <MultiActionAreaCard handleLogin = {handleLogin}/>
+        <LoginScreen
+          handleLogin={handleLogin}
+          updateAuthenticateStatus={updateAuthenticateStatus}
+        />
+      ) : loadingScreen ? (
+        <LoadingScreen />
+      ) : (
+        <Router>
+          <SideMenu
+            onCollapse={(inactive) => {
+              setInactive(inactive);
+            }}
+            handleToggle={(isChecked) => {
+              setIsChecked(!isChecked);
+            }}
+            workspaceId={selectedWorkspace}
+            allReportsData={updatedReports}
+          />
+
+          <div
+            className={`container ${inactive ? "inactive" : ""}`}
+            style={{ backgroundColor: `${isChecked ? "#f4f9f4" : "#666"}` }}
+          >
+            {menuList?.map((route, i) =>
+              route.component != "Report" ? (
+                <Route
+                  key={i}
+                  exact={true}
+                  path={route.to}
+                  component={route.component == "Home" ? Home : Admin}
+                />
+              ) : (
+                <Route
+                  key={i}
+                  exact={true}
+                  path={route.to}
+                  render={(props) => <Report {...props} />}
+                />
+              )
             )}
-
-        </div>
-        // </MsalProvider>
-    );
+          </div>
+        </Router>
+      )}
+    </div>
+    // </MsalProvider>
+  );
 }
 
 const mapStateToProps = (state) => ({
-    updatedReports: state.reportReducer.updatedReports,
-    editMode: state.reportReducer.reportEditMode
+  updatedReports: state.reportReducer.updatedReports,
+  editMode: state.reportReducer.reportEditMode,
 });
-
 
 // Connect the component to Redux using the connect function
 export default connect(mapStateToProps)(App);

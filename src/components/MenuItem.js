@@ -13,16 +13,16 @@ import BulletIcon from "../assets/more.png";
  **/
 
 const MenuItem = (props) => {
-  const { name, subMenus, iconClassName, onClick, to, exact, menuItem,isActive } = props;
+  const { name, subMenus, iconClassName, onClick, to, exact, menuItem,isActive,handleMenuSel } = props;
   const [expand, setExpand] = useState(null);
   const [subcategoryReportSel, setSubcategoryReportSel] = useState(false);
   const [reportSel, setReportSel] = useState(false);
   // const [isActive, setIsActive] = useState(false)
-
-  const handleMenuSel = (menu) => {};
+ 
+  // const handleMenuSel = (menu) => {};
 
  useEffect(()=>{
- console.log("isActive",isActive)
+//  console.log("isActive",isActive)
  },[isActive])
   return (
     <li onClick={props.onClick}>
@@ -74,7 +74,7 @@ const MenuItem = (props) => {
         <ul className={`sub-category`}>
           {menuItem?.subCategories?.map((menu, index) => (
             <li key={index} onClick={handleMenuSel(menu)}>
-              <NavLink to={"/report/"}>{menu.name}</NavLink>
+              <NavLink to={`/category/${name?.toLowerCase()}/subCategory/${menu.name}`}>{menu.name}</NavLink>
               {menu?.reports?.length > 0 && (
                 <ul style={{ marginLeft: "20px", background: "white" }}>
                   {menu?.reports?.map((report, index) => (
@@ -86,7 +86,7 @@ const MenuItem = (props) => {
                       }}
                     >
                       <NavLink
-                        to={`category/${name}/report/${report.name}`}
+                        to={`/category/${name?.toLowerCase()}/report/${report.name}`}
                         style={{
                           // background: "white",
                           borderBottom: "1px solid grey",
@@ -122,7 +122,7 @@ const MenuItem = (props) => {
             // setIsActive(!isActive)
           }}>
             <NavLink
-              to={`/report/${report.name}`}
+              to={`/category/${name?.toLowerCase()}/report/${report.name}`}
               style={{
                 backgroundColor:
                   report.id == reportSel ? "aquamarine" : "",

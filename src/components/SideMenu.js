@@ -11,18 +11,20 @@ import {
   updateReports,
 } from "../features/reports/reportSlice";
 import { updateMenuList } from "../features/menuList/menuListSlice";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const SideMenu = memo((props) => {
   const [inactive, setInactive] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [allReportsData, setAllReportsData] = useState(props.allReportsData);
   const [selMenu, setSelMenu] = useState();
+  const location = useLocation();
   let selectedWorkspces = sessionStorage
     .getItem("selectedWorkspaces")
     ?.split(",");
   const menuItemstest = useSelector((state) => state.menuListReducer.menuItems);
   const dispatch = useDispatch();
-  console.log("menus from side menu", menuItemstest);
+  // console.log("menus from side menu", menuItemstest);
   const [menuItems, setMenuItems] = useState(
     menuItemsTest(menuItemstest, allReportsData)
   );
@@ -50,6 +52,8 @@ const SideMenu = memo((props) => {
     console.log("checking menu", menuItem);
   };
 
+
+
   useEffect(() => {
     if (inactive) {
       removeActiveClassFromSubMenu();
@@ -76,7 +80,7 @@ const SideMenu = memo((props) => {
   */
   useEffect(async () => {
     let menuItems = document.querySelectorAll(".menu-item");
-    console.log("menuItems SideMenu", menuItems);
+    // console.log("menuItems SideMenu", menuItems);
     menuItems &&
       menuItems.forEach((el) => {
         el.addEventListener("click", (e) => {
@@ -89,15 +93,19 @@ const SideMenu = memo((props) => {
           }
         });
       });
-    console.log(
-      "from sidemenu",
-      menuItemsTest(menuItemstest, props.allReportsData)
-    );
+    // console.log(
+    //   "from sidemenu",
+    //   menuItemsTest(menuItemstest, props.allReportsData)
+    // );
     setAllReportsData(props.allReportsData);
     setMenuItems(menuItemsTest(menuItemstest, props.allReportsData));
     let val = await menuItemsTest(menuItemstest, props.allReportsData);
     dispatch(updateMenuList(val));
 
+  }, [props.allReportsData]);
+
+  useEffect(()=> {
+    // dispatch(updateMenuList(menuItems))
     const url = window.location.pathname; // e.g., "/category/marketting/report/some-page"
     const parts = url.split("/");
 
@@ -108,18 +116,15 @@ const SideMenu = memo((props) => {
     const menuItem = menuList.find(
       (item) => item.name?.toLowerCase() === category?.toLowerCase()
     )
+
     handleMenuSel(menuItem)
-  }, [props.allReportsData]);
 
-  // useEffect(()=> {
-  //   dispatch(updateMenuList(menuItems))
-
-  // }, [menuItems])
+  }, [location.pathname, menuList, handleMenuSel])
 
   useEffect(() => {
     // dispatch(updateMenuList(menuList))
     let menuItems = document.querySelectorAll(".menu-item");
-    console.log("menuItems SideMenu", menuItems);
+    // console.log("menuItems SideMenu", menuItems);
     menuItems &&
       menuItems.forEach((el) => {
         el.addEventListener("click", (e) => {
@@ -145,7 +150,7 @@ const SideMenu = memo((props) => {
           <img src={logo} alt="webscript" />
         </div>
         <div className="header-container">
-          <div className="main-title">Supply Chain Control Tower</div>
+          {/* <div className="main-title">Supply Chain Control Tower</div> */}
           <div
             onClick={() => setInactive(!inactive)}
             className="toggle-menu-btn"
@@ -182,6 +187,7 @@ const SideMenu = memo((props) => {
                 iconClassName={menuItem.iconClassName}
                 isChecked={isChecked}
                 menuItem={menuItem}
+                handleMenuSel={(menuItem) => handleMenuSel(menuItem)}
                 onClick={(e) => {
                   if (inactive) {
                     setInactive(false);

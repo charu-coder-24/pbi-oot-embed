@@ -104,13 +104,13 @@ const CategoryModal = ({
 
       if (newReports.length == 0) {
         error.manualError = "Report added already exist try adding new report!";
-        console.log("con1", newReports, error);
+        // console.log("con1", newReports, error);
       } else {
         try {
           reportsCopy?.push(...newReports);
-          console.log("newReports", reportsCopy, t, t.push(...newReports));
+          // console.log("newReports", reportsCopy, t, t.push(...newReports));
         } catch (err) {
-          console.log("Error", err);
+          // console.log("Error", err);
           error.jsError = err.message;
         }
       }
@@ -126,7 +126,7 @@ const CategoryModal = ({
         try {
           subCategoryObjCopy?.push(subCategoryObj);
         } catch (err) {
-          console.log("Error", err);
+          // console.log("Error", err);
           error.jsError = err.message;
         }
       } else {
@@ -143,7 +143,7 @@ const CategoryModal = ({
       reports: reportsCopy,
       error: error,
     };
-    console.log("con", categoryObj);
+    // console.log("con", categoryObj);
 
     if (selectedButton == "category" && category != undefined) {
       addNewCategory(categoryObject);

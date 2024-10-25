@@ -55,7 +55,7 @@ const ViewMode = ({ categories, onEditClick }) => {
     setIsEditMode(false);
   };
 
-  console.log("categories viewmode", categories)
+  // console.log("categories viewmode", categories)
   return (
     <div >
       {/* <Typography variant='h5'> */}
@@ -112,7 +112,7 @@ const CategoryHierarchy = () => {
 
   useEffect(() => {
   const reportObjects = menuList.find(item => item.component === "Report")?.testArray;
-    console.log("wrong", reportObjects,menuItems,menuList)
+    // console.log("wrong", reportObjects,menuItems,menuList)
     setMenuItems(reportObjects)
   }, [menuList])
 

@@ -31,7 +31,7 @@ const Workspace = memo((props) => {
 
   const selectedWorkspaces = (list) => {
     dispatch(updateSelWorkspace(list))
-    let selectedWorkspaceIds = list?.map(workspace => workspace.id);
+    let selectedWorkspaceIds = list?.map(workspace => workspace?.id);
     const filteredReports = reports && reports.filter(report => selectedWorkspaceIds.includes(report.datasetWorkspaceId));
     dispatch(updateReports(filteredReports))
     setSelReports(filteredReports)
@@ -47,9 +47,7 @@ const Workspace = memo((props) => {
     dispatch(updateReports(list))
   }
 
-  useEffect(() => {
-    console.log("from redux store workspace", selectedReports)
-  }, [])
+
 
   useEffect(() => {
     isTokenExpired()

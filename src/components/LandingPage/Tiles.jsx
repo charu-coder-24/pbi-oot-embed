@@ -1,109 +1,110 @@
 import React from 'react';
 import './Tiles.css'; // Ensure the CSS file path is correct
+import ExecutiveImage from '../../assets/landingPageImages/Executive.jpg'
+import FinanceImage from '../../assets/landingPageImages/Finance.jpg'
+import ManufacturingImage from '../../assets/landingPageImages/Manufacturing.jpg'
+import MarkettingImage from '../../assets/landingPageImages/Marketing.jpg'
+import SalesImage from '../../assets/landingPageImages/Sales.jpg'
+import SupplyChainImage from '../../assets/landingPageImages/SupplyChain.jpg'
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+
+const tileData = [
+  {
+    id: 'executive',
+    name: 'Executive View',
+    description: 'Get a strategic overview with key performance indicators and insights for informed decision-making.',
+    // detail: 'and insights for informed decision-making.',
+    imageUrl: ExecutiveImage,
+  },
+  {
+    id: 'finance',
+    name: 'Finance View',
+    description: 'Monitor financial health and profitability with comprehensive analysis of revenue, costs, and cash flow.',
+    // detail: 'analysis of revenue, costs, and cash flow.',
+    imageUrl: FinanceImage,
+  },
+  {
+    id: 'sales',
+    name: 'Sales View',
+    description: 'Analyze sales trends, channel effectiveness, and lead conversion to boost revenue and growth.',
+    // detail: 'and lead conversion to boost revenue and growth.',
+    imageUrl: ManufacturingImage,
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing View',
+    description: 'Optimize marketing strategies with in-depth insights on campaign performance and customer segmentation.',
+    // detail: 'on campaign performance and customer segmentation.',
+    imageUrl: MarkettingImage,
+  },
+  {
+    id: 'supply-chain',
+    name: 'Supply Chain View',
+    description: 'Enhance supply chain efficiency by tracking inventory, supplier performance, and logistics metrics.',
+    // detail: 'supplier performance, and logistics metrics.',
+    imageUrl: SalesImage,
+  },
+  {
+    id: 'manufacturing',
+    name: 'Manufacturing View',
+    description: 'Improve production processes with real-time metrics on equipment effectiveness, quality, and productivity.',
+    // detail: 'on equipment effectiveness, quality, and productivity.',
+    imageUrl: SupplyChainImage,
+  },
+];
 
 const Tiles = () => {
-  const handleClick = (name) => {
-    window.location.href = `/category/${name}/report/`; // Replace with the desired URL
-    console.log(window.location.hostname)
+  const handleClick = (id) => {
+    window.location.href = `/category/${id}/report/`;
+    console.log(`Navigating to /category/${id}/report/`);
   };
-  return (
-    <>
-    <div className="wrap">
-      <div className="tile" onClick={() => handleClick()} style={{cursor:"pointer"}}>
-        <img 
-          src="https://images.unsplash.com/photo-1562564055-71e051d33c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
-          alt="Executive View" 
-        />
-        <div className="text">
-          <h1>Executive View</h1>
-          <h2 className="animate-text">A top-level dashboard for decision makers.</h2>
-          <p className="animate-text">Consolidate data for actionable insights.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
 
-      <div className="tile" onClick={() => handleClick("finance")} style={{cursor:"pointer"}}>
-        <img 
-          src="https://images.unsplash.com/photo-1521540216272-a50305cd4421?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
-          alt="Finance View" 
-        />
-        <div className="text">
-          <h1>Finance View</h1>
-          <h2 className="animate-text">Get insights into financial performance.</h2>
-          <p className="animate-text">Analyze P&L statements, expenses, and profitability.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
-
-      <div className="tile" onClick={() => handleClick("sales")} style={{cursor:"pointer"}}>
-        <img 
-          src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-          alt="Sales View" 
-        />
-        <div className="text">
-          <h1>Sales View</h1>
-          <h2 className="animate-text">Track key sales metrics.</h2>
-          <p className="animate-text">Monitor Net Sales, Gross Margin, and customer growth.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
-
-      <div className="tile" onClick={() => handleClick("marketting")} style={{cursor:"pointer"}}>
-        <img 
-          src="https://images.unsplash.com/photo-1501523460185-2aa5d2a0f981?q=80&w=1862&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-          alt="Marketing View" 
-        />
-        <div className="text">
-          <h1>Marketing View</h1>
-          <h2 className="animate-text">Assess product and campaign performance.</h2>
-          <p className="animate-text">Analyze product growth, campaign effectiveness, and ROI.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
-
-      <div className="tile" onClick={() => handleClick("supply-chain")} style={{cursor:"pointer"}}>
-        <img 
-          src="https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-          alt="Supply Chain View" 
-        />
-        <div className="text">
-          <h1>Supply Chain View</h1>
-          <h2 className="animate-text">Optimize your supply chain operations.</h2>
-          <p className="animate-text">Forecast accuracy, manage risks, and improve efficiency.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-        </div>
-
-        <div className="tile" onClick={() => handleClick("manufacturing")} style={{cursor:"pointer"}}>
-        <img 
-          src="https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-          alt="Manufacturing View" 
-        />
-        <div className="text">
-          <h1>Manufacturing View</h1>
-          <h2 className="animate-text">Optimize your supply chain operations.</h2>
-          <p className="animate-text">Forecast accuracy, manage risks, and improve efficiency.</p>
-          <div className="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-        </div>
-    </div>
-    {/* <div className="grid">
-   
-      </div> */}
-    </>
+  // <NavLink
+  //                       to={`/category/${name?.toLowerCase()}/report/${report.name}`}
+  //                       style={{
+  //                         // background: "white",
+  //                         borderBottom: "1px solid grey",
+  //                         backgroundColor:
+  //                           report.id == subcategoryReportSel
+  //                             ? "aquamarine"
+  //                             : "",
+  //                         fontWeight:
+  //                           report.id == subcategoryReportSel
+  //                             ? "bold"
+  //                             : "inherit",
+  //                         cursor: "pointer",
+  //                         borderRadius: "2px",
+  //                       }}
+  //                     >
+  //                       {report.name}
+  //                     </NavLink>
     
+  return (
+    <div className="wrap">
+      {tileData.map((tile) => (
+        <NavLink
+        to={`/category/${tile?.id?.toLowerCase()}/report/`}
+        >
+          <div
+          key={tile.id}
+          className="tile"
+          // onClick={() => handleClick(tile.id)}
+          style={{ cursor: 'pointer' }}
+        >
+          <img src={tile.imageUrl} alt={`${tile.name}`} />
+          <div className="text">
+            <h1>{tile.name}</h1>
+            <h2 className="animate-text">{tile.description}</h2>
+            <p className="animate-text">{tile.detail}</p>
+            <div className="dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        </NavLink>
+        
+      ))}
+    </div>
   );
 };
 

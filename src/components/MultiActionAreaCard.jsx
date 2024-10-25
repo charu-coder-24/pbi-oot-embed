@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function MultiActionAreaCard(props) {
-  console.log("props", props)
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>

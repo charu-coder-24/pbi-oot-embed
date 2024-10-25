@@ -149,7 +149,6 @@ const DraggableCategory = ({
                     <span
                       className="icon"
                       onClick={() => {
-                        console.log("hey checking");
 
                         setSubCategoryDropdownState(
                           subCategoryDropdownState?.map((item) =>
@@ -389,13 +388,13 @@ const ListPage = () => {
               padding: "10px",
             }}
           >
-            {workspaces.map((workspace) => (
+            {workspaces?.map((workspace) => (
               <MenuItem key={workspace} value={workspace}>
                 <Checkbox
                   checked={selectedWorkspaces.includes(workspace)}
                   color="primary"
                 />
-                <ListItemText primary={workspace.name} />
+                <ListItemText primary={workspace?.name} />
               </MenuItem>
             ))}
           </Select>

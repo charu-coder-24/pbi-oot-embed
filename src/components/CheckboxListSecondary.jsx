@@ -27,7 +27,7 @@ export default function CheckboxListSecondary(props) {
 
     setChecked(newChecked);
     props.selectedWorkspaces(newChecked)
-    console.log("selected checked workspaces", newChecked)
+    // console.log("selected checked workspaces", newChecked)
   };
 
   const handleDragEnd = (result) => {
@@ -40,7 +40,7 @@ export default function CheckboxListSecondary(props) {
     updatedList.splice(result.destination.index, 0, movedItem);
     props.updateReportSequence(updatedList)
     setChecked(updatedList);
-    console.log("props",props)
+    // console.log("props",props)
   };
 
   return (

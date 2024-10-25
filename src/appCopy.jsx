@@ -55,7 +55,7 @@ function App({ msalInstance }) {
     const dispatch = useDispatch()
     const reports = useSelector((state) => state.reportReducer.allReportsData)
     const updatedReports = useSelector((state) => state.reportReducer.updatedReports)
-    console.log("from redux store app", reports)
+    // console.log("from redux store app", reports)
 
     useEffect(() => {
         if (isTokenExpired()) {
@@ -98,7 +98,7 @@ function App({ msalInstance }) {
     async function fetchWorkspaces() {
         try {
             const res = await getMyOrgWorkspaces();
-            console.log("outside this function")
+            // console.log("outside this function")
 
             setWorkspaces(res)
 

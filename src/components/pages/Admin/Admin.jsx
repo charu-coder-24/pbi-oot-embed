@@ -14,9 +14,6 @@ const Admin = (props) => {
   const [expand, setExpand] = useState(false);
 //   reportsDataDummy
 
-useEffect(()=>{
-console.log("hey")
-},[])
   return (
     // <CategoryHierarchy />
     // <YourComponent />

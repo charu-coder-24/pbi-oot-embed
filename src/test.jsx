@@ -139,7 +139,7 @@ if (categoryIndex !== -1) {
 }
 
 // Now, the "Supply Chain" category is updated in the main object
-    console.log("categoryObj lucj", dummyObject,categoryObj)
+    // console.log("categoryObj lucj", dummyObject,categoryObj)
   }
 
   return (
@@ -163,13 +163,13 @@ if (categoryIndex !== -1) {
             }}
           >
 
-            {workspaces.map((workspace) => (
+            {workspaces?.map((workspace) => (
               <MenuItem key={workspace} value={workspace}>
                 <Checkbox
                   checked={selectedWorkspaces.includes(workspace)}
                   color="primary"
                 />
-                <ListItemText primary={workspace.name} />
+                <ListItemText primary={workspace?.name} />
               </MenuItem>
             ))}
           </Select>
