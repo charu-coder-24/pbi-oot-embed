@@ -28,7 +28,7 @@ const tileData = [
     name: 'Sales View',
     description: 'Analyze sales trends, channel effectiveness, and lead conversion to boost revenue and growth.',
     // detail: 'and lead conversion to boost revenue and growth.',
-    imageUrl: ManufacturingImage,
+    imageUrl: SalesImage,
   },
   {
     id: 'marketing',
@@ -42,14 +42,14 @@ const tileData = [
     name: 'Supply Chain View',
     description: 'Enhance supply chain efficiency by tracking inventory, supplier performance, and logistics metrics.',
     // detail: 'supplier performance, and logistics metrics.',
-    imageUrl: SalesImage,
+    imageUrl: SupplyChainImage,
   },
   {
     id: 'manufacturing',
     name: 'Manufacturing View',
     description: 'Improve production processes with real-time metrics on equipment effectiveness, quality, and productivity.',
     // detail: 'on equipment effectiveness, quality, and productivity.',
-    imageUrl: SupplyChainImage,
+    imageUrl: ManufacturingImage,
   },
 ];
 
@@ -94,8 +94,8 @@ const Tiles = () => {
           <img src={tile.imageUrl} alt={`${tile.name}`} />
           <div className="text">
             <h1>{tile.name}</h1>
-            <h2 className="animate-text">{tile.description}</h2>
-            <p className="animate-text">{tile.detail}</p>
+            {/* <h2 className="animate-text">{tile.name}</h2> */}
+            <p className="animate-text">{tile.description}</p>
             <div className="dots">
               <span></span><span></span><span></span>
             </div>

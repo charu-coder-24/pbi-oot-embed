@@ -24,35 +24,50 @@ const SideMenu = memo((props) => {
     ?.split(",");
   const menuItemstest = useSelector((state) => state.menuListReducer.menuItems);
   const dispatch = useDispatch();
-  // console.log("menus from side menu", menuItemstest);
   const [menuItems, setMenuItems] = useState(
     menuItemsTest(menuItemstest, allReportsData)
   );
-  // let menuItems = menuItemsTest(allReportsData);
   const menuList = useSelector((state) => state.menuListReducer.menuItems);
   const handleToggle = () => {
     setIsChecked(!isChecked); // Toggle the value
   };
 
   const handleMenuSel = (menuItem) => {
-    menuItem?.reports?.length > 0
-      ? document.querySelectorAll(".sub-reports").forEach((el, index) => {
-          try {
-            if (el.classList.contains(menuItem?.name)) {
-              el.classList.add("active");
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        })
-      : document.querySelectorAll(".sub-reports").forEach((el) => {
-          el.classList.remove("active");
-        });
+    // Handle reports: Add/remove 'active' class on .sub-reports elements
+    if (menuItem?.reports?.length > 0) {
+      document.querySelectorAll(".sub-reports").forEach((el) => {
+        if (el.classList.contains(menuItem?.name)) {
+          el.classList.add("active");
+        } else {
+          el.classList.remove("active"); // Ensure others are reset
+        }
+      });
+    } else {
+      document.querySelectorAll(".sub-reports").forEach((el) => {
+        el.classList.remove("active"); // Remove all 'active' if no reports
+      });
+    }
+  
+    // Handle sub-categories: Add/remove 'active' class on .sub-category elements
+    if (menuItem?.subCategories?.length > 0) {
+      document.querySelectorAll(".sub-category").forEach((el) => {
+        const className = menuItem?.name?.toLowerCase()?.replace(" ", "-");
+        if (el.classList.contains(className)) {
+          el.classList.add("active");
+        } else {
+          el.classList.remove("active"); // Reset others
+        }
+      });
+    } else {
+      document.querySelectorAll(".sub-category").forEach((el) => {
+        el.classList.remove("active"); // Remove all 'active' if no sub-categories
+      });
+    }
+  
+    // Set the selected menu item
     setSelMenu(menuItem);
-    console.log("checking menu", menuItem);
   };
-
-
+  
 
   useEffect(() => {
     if (inactive) {
@@ -101,10 +116,9 @@ const SideMenu = memo((props) => {
     setMenuItems(menuItemsTest(menuItemstest, props.allReportsData));
     let val = await menuItemsTest(menuItemstest, props.allReportsData);
     dispatch(updateMenuList(val));
-
   }, [props.allReportsData]);
 
-  useEffect(()=> {
+  useEffect(() => {
     // dispatch(updateMenuList(menuItems))
     const url = window.location.pathname; // e.g., "/category/marketting/report/some-page"
     const parts = url.split("/");
@@ -115,11 +129,11 @@ const SideMenu = memo((props) => {
     // const menuList = useSelector((state) => state.menuListReducer.menuItems);
     const menuItem = menuList.find(
       (item) => item.name?.toLowerCase() === category?.toLowerCase()
-    )
+    );
+    console.log("category selected", category, menuItem);
 
-    handleMenuSel(menuItem)
-
-  }, [location.pathname, menuList, handleMenuSel])
+    handleMenuSel(menuItem);
+  }, [location.pathname, menuList, handleMenuSel]);
 
   useEffect(() => {
     // dispatch(updateMenuList(menuList))

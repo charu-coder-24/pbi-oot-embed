@@ -22,14 +22,14 @@ const MenuItem = (props) => {
   // const handleMenuSel = (menu) => {};
 
  useEffect(()=>{
-//  console.log("isActive",isActive)
+ console.log("isActive",isActive)
  },[isActive])
   return (
     <li onClick={props.onClick}>
       <Link
         exact
         to={to}
-        className={`menu-item`}
+        className={`menu-item ${!isActive ? "active":"inactive"}`}
         style={{ color: `${props.isChecked ? "#27A4B5ff" : "black"}` }}
       >
         <div className="menu-icon">
@@ -71,10 +71,10 @@ const MenuItem = (props) => {
       
       {menuItem?.subCategories && menuItem?.subCategories?.length > 0 ? (
        
-        <ul className={`sub-category`}>
+        <ul className={`sub-category ${menuItem?.name?.replace(" ","-")?.toLowerCase()}`}>
           {menuItem?.subCategories?.map((menu, index) => (
             <li key={index} onClick={handleMenuSel(menu)}>
-              <NavLink to={`/category/${name?.toLowerCase()}/subCategory/${menu.name}`}>{menu.name}</NavLink>
+              <NavLink to={`/category/${name?.replace(" ","-")?.toLowerCase()}/subCategory/${menu.name}`}>{menu.name}</NavLink>
               {menu?.reports?.length > 0 && (
                 <ul style={{ marginLeft: "20px", background: "white" }}>
                   {menu?.reports?.map((report, index) => (
@@ -86,7 +86,7 @@ const MenuItem = (props) => {
                       }}
                     >
                       <NavLink
-                        to={`/category/${name?.toLowerCase()}/report/${report.name}`}
+                        to={`/category/${name?.replace(" ","-")?.toLowerCase()}/report/${report.name}`}
                         style={{
                           // background: "white",
                           borderBottom: "1px solid grey",
